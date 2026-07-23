@@ -29,4 +29,4 @@ export async function me() {
     const res = await api.post("/auth/me");
 
     return res.data;
-}
+} 

@@ -7,7 +7,7 @@ type InputFormProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export function InputForm({id, type, placeholder, label, ...props}: InputFormProps) {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1 w-full">
             <label
                 htmlFor={id}
                 className="font-medium">

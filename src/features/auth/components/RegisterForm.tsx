@@ -1,23 +1,35 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { ButtonLogin } from "@/components/ButtonLogin";
+import { ButtonLogin } from "@/components/ButtonSubmit";
 import { InputForm } from "@/components/InputForm";
 import { Sector } from "@/features/sector/types";
 import { findAllSectors } from "@/features/sector/services/sector.service";
 import { register } from "../services/auth.service";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { LoadingComponent } from "@/components/LoadingComponent";
 
 export function RegisterForm() {
     const [sectors, setSectors] = useState<Sector[]>([])
 
+    //boolean loading component
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         async function loadSectors() {
             try {
+                setLoading(true)
                 const data = await findAllSectors();
                 setSectors(data)
             } catch (_err) {
-                console.log(_err);
+                if (axios.isAxiosError(_err)) {
+                  alert(_err.response?.data);
+                } else {
+                    alert(_err);
+                }
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -37,25 +49,35 @@ export function RegisterForm() {
         e.preventDefault()
 
         try {
+            setLoading(true)
+
             const {accessToken} = await register(formData);
 
             localStorage.setItem("token", accessToken);
 
             router.push('/dashboard')
         } catch (_err) {
-            alert(_err)
+            if (axios.isAxiosError(_err)) {
+              alert(_err.response?.data);
+            } else {
+                alert(_err);
+            }
         }
     }
 
+    if(loading) {
+        return (
+            <LoadingComponent message="Conectando ao servidor... Isso pode levar até 1 minuto devido a hospedagem."/>
+        )
+    } else {
     return (
-        <div>
-            <h2>
-                Bem vindo a empresa!
-                <br />
-                Cadastre-se aqui para realizar seu primeiro acesso ao Connect Hub
-            </h2>
+        <div className="bg-black text-white w-full">
+            <div className=" flex flex-col px-5 text-center gap-2 mb-5">
+                <h3 className="text-xl">Bem vindo a empresa!</h3>
+                <p className="text-gray-500">Cadastre-se aqui para realizar seu primeiro acesso ao Connect Hub</p>
+            </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col items-center content-center gap-3 px-10">
                 <InputForm 
                     id="name"
                     name="name"
@@ -82,26 +104,28 @@ export function RegisterForm() {
                     onChange={e => setFormData({...formData, password: e.target.value})}
                 />
 
-                <label htmlFor="sector">Setor</label>
-                <select
-                className="rounded-lg border p-3"
-                id="sector"
-                value={formData.sector}
-                onChange={e => setFormData({...formData, sector: e.target.value})}
-                >
-                    <option value="">
-                    Selecione um setor
-                    </option>
-                    {sectors.map((i) => (
-                        <option
-                            key={i.id}
-                            value={i.name}
-                        >
-                            {i.name}
+                <div className="flex flex-col gap-1 w-full">
+                    <label htmlFor="sector">Setor</label>
+                    <select
+                    className="rounded-lg border p-3 focus:border-blue-500"
+                    id="sector"
+                    value={formData.sector}
+                    onChange={e => setFormData({...formData, sector: e.target.value})}
+                    >
+                        <option value="" className="bg-black">
+                        Selecione um setor
                         </option>
-                    ))
-                    }
-                </select>
+                        {sectors.map((i) => (
+                            <option className="bg-black"
+                                key={i.id}
+                                value={i.name}
+                            >
+                                {i.name}
+                            </option>
+                        ))
+                        }
+                    </select>
+                </div>
 
                 <ButtonLogin type="submit">
                     Registrar
@@ -110,4 +134,5 @@ export function RegisterForm() {
 
         </div>
     )
+    }
 }

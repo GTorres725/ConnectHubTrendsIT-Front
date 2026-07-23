@@ -1,8 +1,10 @@
-import { ButtonLogin } from "@/components/ButtonLogin";
+import { ButtonLogin } from "@/components/ButtonSubmit";
 import { InputForm } from "@/components/InputForm";
 import { useState } from "react";
 import { login } from "../services/auth.service";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { LoadingComponent } from "@/components/LoadingComponent";
 
 export function LoginForm() {
 
@@ -23,15 +25,18 @@ export function LoginForm() {
 
             router.push('/dashboard')
         } catch (_err) {
-            alert(_err)
+            if (axios.isAxiosError(_err)) {
+              alert(_err.response?.data);
+            } else {
+                alert(_err);
+            }
         }
     }
 
+
     return (
         <div>
-            <h2>Login</h2>
-
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col items-center content-center gap-3 px-10">
                 <InputForm
                     id="email"
                     type="email"

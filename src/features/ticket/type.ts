@@ -1,11 +1,13 @@
+import { Status } from "@/components/CardTickets";
+
 export type Ticket = {
     id: number;
     sectorId: number;
     title: string;
     description: string;
-    status: string;
+    status: Status;
     descriptionConclusion: string | null;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     creatorId: number;
 }
