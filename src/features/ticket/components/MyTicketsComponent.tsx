@@ -75,7 +75,7 @@ export function MyTicketsComponent () {
                                     key={i.id}
                                     id={i.id}
                                     title={i.title}
-                                    sector={i.sectorId}
+                                    sector={i.sector.name}
                                     status={i.status}
                                     description={i.description}
                                     date={i.createdAt}

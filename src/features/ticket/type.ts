@@ -10,4 +10,7 @@ export type Ticket = {
     createdAt: string;
     updatedAt: string;
     creatorId: number;
+    sector: {
+        name: string;
+    };
 }

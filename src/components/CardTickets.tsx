@@ -3,7 +3,7 @@ export type Status = "pending" | "inProgress" | "carriedOut" | "finalizationAppr
 type Props = {
     id: number;
     title: string;
-    sector: number;
+    sector: string;
     status: Status;
     description: string;
     date: string;
