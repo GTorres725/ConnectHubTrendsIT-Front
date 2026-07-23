@@ -109,7 +109,7 @@ export default function DashboardPage () {
                         <h1 className="mb-3">
                             Olá, {user.name}
                         </h1>
-                        <div className="flex flex-wrap justify-center gap-2.5 sm:grid sm:grid-cols-4 mx-auto mb-3">
+                        <div className="flex flex-wrap justify-center items-center gap-2.5 sm:grid sm:grid-cols-4 mx-auto mb-3">
                             <ButtonNavDash label='Meus Tickets' click={ () => setBooleanBtnNavDash({value: 'myTickets', hability: !booleanBtnNavDash.hability}) }/>
                             <ButtonNavDash label='Novo Ticket' click={ () => setBooleanBtnNavDash({value: 'addTicket', hability: !booleanBtnNavDash.hability}) }/>
                             <ButtonNavDash label='Adicionar serviço' click={ () => setBooleanBtnNavDash({value: 'addService', hability: !booleanBtnNavDash.hability}) }/>

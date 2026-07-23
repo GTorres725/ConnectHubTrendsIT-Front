@@ -1,3 +1,7 @@
+"use client"
+
+import { useRouter } from "next/navigation";
+
 type Props = {
     name: string | undefined;
     email: string | undefined;
@@ -7,8 +11,15 @@ type Props = {
 }
 
 export function UserDataComponent ({name, email, userId, sectorId}: Props) {
+
+    const router = useRouter();
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        router.push('/')
+    }
     return (
-        <div className="bg-gray-900 py-5 w-[90%] rounded-md">
+        <div className="bg-gray-900 py-5 w-[90%] rounded-md text-center">
                 <div className="flex items-center w-full justify-center">
                     <p className="text-sm text-gray-400">Nome:</p>
                     {"\u00A0"}
@@ -35,7 +46,25 @@ export function UserDataComponent ({name, email, userId, sectorId}: Props) {
                 </div>
                 {/* <p>Setor: {sector}</p> */}
 
-                <button>
+                <button className="
+                    cursor-pointer
+                    rounded-xl
+                    border
+                    border-zinc-800
+                    bg-transparent
+                    px-4
+                    py-2
+                    text-sm
+                    font-medium
+                    text-white
+                    transition-all
+                    duration-200    
+                    hover:border-white
+                    hover:bg-black
+                    mb-1
+                    mx-auto
+                    mt-3"
+                    onClick={logout}>
                     Sair
                 </button>
         </div>

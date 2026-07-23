@@ -23,6 +23,7 @@ export function ButtonCardsFilterTickets({label, value, click}: Props) {
         hover:border-blue-700
         hover:shadow-lg
         cursor-pointer
+        mx-auto
       "
     >
       {/* Conteúdo normal */}
