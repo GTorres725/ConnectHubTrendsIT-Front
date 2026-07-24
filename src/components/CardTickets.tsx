@@ -43,7 +43,7 @@ export function CardTickets ({id, title, sector, status, description, date, clic
     return (
         <div className="w-full flex flex-col items-center mb-3 cursor-pointer" onClick={click}>
             <div className="flex flex-col bg-gray-900 w-[95%] rounded-2xl py-2">
-                <div className="flex flex-row justify-around items-center">
+                <div className="flex flex-wrap justify-around items-center">
                     <div className="flex flex-row gap-2 items-center">
                         <p className="text-sm text-gray-400">Ticket ID: </p>
                         <h3 className="text-blue-900 font-bold">{id}</h3>
