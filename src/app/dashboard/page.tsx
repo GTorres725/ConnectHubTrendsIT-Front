@@ -13,6 +13,7 @@ import { findTickets } from "@/features/ticket/ticket.service";
 import { Ticket } from "@/features/ticket/type";
 import { UserDataComponent } from "@/features/user/components/UserDataComponent";
 import { User } from "@/features/user/type";
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -63,11 +64,7 @@ export default function DashboardPage () {
             
             setTickets(tickets);
         } catch (_err) {
-            if (axios.isAxiosError(_err)) {
-              alert(_err.response?.data);
-            } else {
-                alert(_err);
-            }
+            getErrorMessage(_err);
         } finally {
             setLoading(false);
         }

@@ -9,6 +9,7 @@ import { register } from "../services/auth.service";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { LoadingComponent } from "@/components/LoadingComponent";
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage";
 
 export function RegisterForm() {
     const [sectors, setSectors] = useState<Sector[]>([])
@@ -23,11 +24,7 @@ export function RegisterForm() {
                 const data = await findAllSectors();
                 setSectors(data)
             } catch (_err) {
-                if (axios.isAxiosError(_err)) {
-                  alert(_err.response?.data);
-                } else {
-                    alert(_err);
-                }
+                getErrorMessage(_err);
             } finally {
                 setLoading(false);
             }
@@ -57,11 +54,9 @@ export function RegisterForm() {
 
             router.push('/dashboard')
         } catch (_err) {
-            if (axios.isAxiosError(_err)) {
-              alert(_err.response?.data);
-            } else {
-                alert(_err);
-            }
+            getErrorMessage(_err);
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -72,7 +67,7 @@ export function RegisterForm() {
     } else {
     return (
         <div className="bg-black text-white w-full">
-            <div className=" flex flex-col px-5 text-center gap-2 mb-5">
+            <div className=" flex flex-col px-5 text-center gap-2 mb-3 -mt-0.75">
                 <h3 className="text-xl">Bem vindo a empresa!</h3>
                 <p className="text-gray-500">Cadastre-se aqui para realizar seu primeiro acesso ao Connect Hub</p>
             </div>
@@ -103,6 +98,13 @@ export function RegisterForm() {
                     value={formData.password}
                     onChange={e => setFormData({...formData, password: e.target.value})}
                 />
+                <div className="text-[10px] text-gray-400 -mt-1.25 w-full">
+                    <p>• A senha deve conter 8 ou mais caracteres</p>
+                    <p>• A senha deve conter no mínimo um caractere maiúsculo</p>
+                    <p>• A senha deve conter no mínimo um caractere minúsculo</p>
+                    <p>• A senha deve conter no mínimo um caractere especial</p>
+                    <p>• A senha deve conter no mínimo um caractere numérico</p>
+                </div>
 
                 <div className="flex flex-col gap-1 w-full">
                     <label htmlFor="sector">Setor</label>

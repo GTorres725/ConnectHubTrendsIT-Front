@@ -8,6 +8,7 @@ import { addTicket } from "../ticket.service";
 import { ButtonLogin } from "@/components/ButtonSubmit";
 import axios from "axios";
 import { LoadingComponent } from "@/components/LoadingComponent";
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage";
 
 export function AddTicketComponent() {
     //boolean loading component
@@ -26,11 +27,7 @@ export function AddTicketComponent() {
                 const data = await findAllSectors();
                 setSectors(data);
             } catch (_err) {
-                if (axios.isAxiosError(_err)) {
-                  alert(_err.response?.data);
-                } else {
-                    alert(_err);
-                }
+                getErrorMessage(_err);
             } finally {
                 setLoading(false);
                 setMessage('')
@@ -60,11 +57,7 @@ export function AddTicketComponent() {
             });
             alert('Ticket enviado.');
         } catch (_err) {
-            if (axios.isAxiosError(_err)) {
-              alert(_err.response?.data);
-            } else {
-                alert(_err);
-            }
+            getErrorMessage(_err);
         } finally {
             setLoading(false);
             setMessage('');

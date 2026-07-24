@@ -6,6 +6,7 @@ import axios from "axios"
 import { ButtonLogin } from "@/components/ButtonSubmit"
 import { InputForm } from "@/components/InputForm"
 import { LoadingComponent } from "@/components/LoadingComponent"
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage"
 
 type Props = {
     ticketId: number,
@@ -38,12 +39,8 @@ export function UpdateMyTicketComponent ({ticketId}: Props) {
                 status: ''
             });
             alert('Ação realizada.');
-        } catch (_err)  {
-            if (axios.isAxiosError(_err)) {
-              alert(_err.response?.data);
-            } else {
-                alert(_err);
-            }
+        } catch (_err) {
+            getErrorMessage(_err);
         } finally {
             setLoading(false);
         }

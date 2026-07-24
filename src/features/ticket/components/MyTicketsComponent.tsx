@@ -8,6 +8,7 @@ import { FindServiceLogComponent } from "@/features/service-logs/components/Find
 import { UpdateMyTicketComponent } from "./UpdateMyTicketComponent";
 import axios from "axios";
 import { LoadingComponent } from "@/components/LoadingComponent";
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage";
 
 
 export function MyTicketsComponent () {
@@ -27,11 +28,7 @@ export function MyTicketsComponent () {
                 const tickets = await findMyTickets(date)
                 setTickets(tickets)
             } catch (_err) {
-                if (axios.isAxiosError(_err)) {
-                  alert(_err.response?.data);
-                } else {
-                    alert(_err);
-                }
+               getErrorMessage(_err);
             } finally {
                 setLoading(false);
             }

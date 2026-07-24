@@ -5,6 +5,7 @@ import { ServiceLog } from "../types"
 import { findLogService } from "../logs.service"
 import axios from "axios";
 import { LoadingComponent } from "@/components/LoadingComponent";
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage";
 
 type Props = {
   ticketId: number;
@@ -25,12 +26,8 @@ export function FindServiceLogComponent ({ticketId, title, click}: Props) {
             const serviceLogs = await findLogService(ticketId);
 
             setServiceLogs(serviceLogs)
-        } catch (_err)  {
-            if (axios.isAxiosError(_err)) {
-              alert(_err.response?.data);
-            } else {
-                alert(_err);
-            }
+        } catch (_err) {
+            getErrorMessage(_err);
         } finally {
             setLoading(false);
         }
