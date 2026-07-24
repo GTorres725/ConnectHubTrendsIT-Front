@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { findMyTickets } from "../ticket.service";
 import { Ticket } from "../type";
 import { CardTickets } from "@/components/CardTickets";
-import { FindServiceLogComponent } from "@/features/service-logs/components/findServiceLogComponent";
+import { FindServiceLogComponent } from "@/features/service-logs/components/FindServiceLogComponent";
 import { UpdateMyTicketComponent } from "./UpdateMyTicketComponent";
 import axios from "axios";
 import { LoadingComponent } from "@/components/LoadingComponent";

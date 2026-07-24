@@ -6,7 +6,7 @@ import { CardTickets } from "@/components/CardTickets";
 import { LoadingComponent } from "@/components/LoadingComponent";
 import { me } from "@/features/auth/services/auth.service";
 import { AddServiceLog } from "@/features/service-logs/components/AddServiceLog";
-import { FindServiceLogComponent } from "@/features/service-logs/components/findServiceLogComponent";
+import { FindServiceLogComponent } from "@/features/service-logs/components/FindServiceLogComponent";
 import { AddTicketComponent } from "@/features/ticket/components/AddTicketsComponent";
 import { MyTicketsComponent } from "@/features/ticket/components/MyTicketsComponent";
 import { findTickets } from "@/features/ticket/ticket.service";
