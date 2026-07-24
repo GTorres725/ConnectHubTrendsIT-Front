@@ -3,8 +3,7 @@ import { InputForm } from "@/components/InputForm";
 import { useState } from "react";
 import { login } from "../services/auth.service";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import { LoadingComponent } from "@/components/LoadingComponent";
+import { getErrorMessage } from "@/utils/getAxiosErrorMessage";
 
 export function LoginForm() {
 
@@ -25,11 +24,7 @@ export function LoginForm() {
 
             router.push('/dashboard')
         } catch (_err) {
-            if (axios.isAxiosError(_err)) {
-              alert(_err.response?.data);
-            } else {
-                alert(_err);
-            }
+            getErrorMessage(_err);
         }
     }
 
