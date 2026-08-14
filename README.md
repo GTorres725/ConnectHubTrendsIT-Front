@@ -5,7 +5,7 @@ Sistema web para gerenciamento de chamados entre setores de uma organização, d
 O sistema permite a abertura de tickets entre setores, registro de serviços realizados, controle de permissões por usuário e gerenciamento do ciclo de vida dos chamados.
 
 ## Link para acesso ao projeto: 
-https://connect-hub-trends-it-front-ldis.vercel.app/
+https://connect-hub-trends-it-front.vercel.app/
 - Pode haver uma leve demora para a primeira conexão ao servidor devido à hibernação da hospedagem no Render.
 
 ## Link para o repositório do Back:
